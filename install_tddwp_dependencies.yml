@@ -1,0 +1,19 @@
+---
+- hosts: ubuntu
+  sudo: yes
+  vars:
+      packages:
+          - git
+          - firefox
+          - python3
+          - python-virtualenv
+          - xvfb
+          - curl
+          - build-essential
+          - openssl
+          - libssl-dev
+  tasks:
+
+      - name: Install dependencies
+        apt: name={{ item }} state=latest update_cache=yes
+        with_items: packages
