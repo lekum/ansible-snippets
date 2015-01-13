@@ -1,0 +1,8 @@
+---
+# Need to force apt because source is untrusted
+- name: Install Go-CD agent
+  apt: name=go-agent state=latest force=yes
+  notify:
+      - Restart Go-CD agent
+- name: Replace the GO_SERVER parameter
+  replace: dest=/etc/default/go-agent regexp='GO_SERVER=(.*)$' replace='GO_SERVER={{ go_server_hostname }}'

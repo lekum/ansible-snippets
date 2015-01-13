@@ -1,0 +1,14 @@
+---
+# Install the go-server
+- 
+  hosts: go_server
+  sudo: yes
+  roles:
+      - go_server
+
+# Install the go-agents
+- 
+  hosts: go_agents
+  sudo: yes
+  roles:
+      - go_agent

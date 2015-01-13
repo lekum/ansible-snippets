@@ -1,0 +1,6 @@
+---
+# Need to force apt because source is untrusted
+- name: Install Go-CD server
+  apt: name=go-server state=latest force=yes
+  notify:
+      - Start Go-CD server
