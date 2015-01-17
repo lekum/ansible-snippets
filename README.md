@@ -1,2 +1,2 @@
 # ansible-snippets
-Ansible snippets and raw materials
+Ansible playbooks, perhaps some roles and probably quite raw materials
