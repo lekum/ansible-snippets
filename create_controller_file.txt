@@ -1,0 +1,8 @@
+---
+- hosts: debian
+  tasks:
+      - name: Get the controller hostname
+        local_action: command cat /etc/hostname
+        register: controller_hostname
+      - name: Create a file with the controller hostname
+        shell: echo {{ controller_hostname.stdout }} > controller_hostname.txt
