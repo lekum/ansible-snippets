@@ -11,4 +11,8 @@
   hosts: go_agents
   sudo: yes
   roles:
-      - go_agent
+      - { 
+            role: go_agent, 
+            # First element of go_server group
+            go_server_hostname: "{{ hostvars[groups['go_server'][0]]['ansible_default_ipv4']['address'] }}"
+        }
