@@ -1,0 +1,9 @@
+---
+- hosts: ec2
+  remote_user: ubuntu
+  tasks:
+      - name: Ping each ec2 instance
+        ping:
+      - name: List the contents of the home directory
+        shell: ls -l
+        register: ls_contents
