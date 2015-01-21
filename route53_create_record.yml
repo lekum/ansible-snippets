@@ -1,0 +1,12 @@
+---
+- hosts: local
+  connection: local
+  gather_facts: no
+  tasks:
+      - name: Create the record
+        route53:
+            command: create
+            zone: lekum.org
+            record: lekum.org
+            type: A
+            value: 130.78.34.16
