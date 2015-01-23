@@ -1,0 +1,7 @@
+---
+# Playbook to perform a dist-upgrade in a apt-based system
+- hosts: debian
+  sudo: yes
+  tasks:
+      - name: Perform apt-get update && apt-get dist-upgrade
+        apt: update_cache=yes upgrade=dist
