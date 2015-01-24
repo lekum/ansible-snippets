@@ -7,3 +7,4 @@
       - name: List the contents of the home directory
         shell: ls -l
         register: ls_contents
+      - debug: msg=ls_contents.stdout
