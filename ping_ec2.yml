@@ -8,3 +8,5 @@
         shell: ls -l
         register: ls_contents
       - debug: msg=ls_contents.stdout
+      - debug: found hosts.txt!
+        when: "host.txt" in ls_comtents.stdout
