@@ -1,3 +1,0 @@
----
-- name: Start Go-CD server
-  service: name=go-server state=started

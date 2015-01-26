@@ -2,5 +2,7 @@
 # Need to force apt because source is untrusted
 - name: Install Go-CD server
   apt: name=go-server state=latest force=yes
-  notify:
-      - Start Go-CD server
+- name: Start Go-CD server
+  service: name=go-server state=started
+- name: Wait for the service to be stared in port 8153 
+  wait_for: port=8153 delay=5
