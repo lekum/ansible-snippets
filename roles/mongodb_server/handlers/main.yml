@@ -1,4 +1,4 @@
 ---
-- name: Start mongodb-org
-  service: name=mongod state=started
+- name: Restart mongodb-org
+  service: name=mongod state=restarted
   sudo: yes

@@ -10,5 +10,13 @@
 - name: Make sure mongodb-org in installed
   apt: name=mongodb-org state=present
   sudo: yes
+
+- name: Enable small journal files if applicable
+  lineinfile: dest=/etc/mongod.conf line="smallfiles = true"
+  sudo: yes
+  when: small_files
   notify:
-      - Start mongodb-org
+      - Restart mongodb-org
+
+- name: Make sure mongod is started
+  service: name=mongod state=started
