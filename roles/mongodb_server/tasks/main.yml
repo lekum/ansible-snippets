@@ -12,7 +12,7 @@
   sudo: yes
 
 - name: Enable small journal files if applicable
-  lineinfile: dest=/etc/mongod.conf line="smallfiles = true"
+  lineinfile: dest=/etc/mongod.conf regexp="^smallfiles =" line="smallfiles = true"
   sudo: yes
   when: small_files
   notify:
