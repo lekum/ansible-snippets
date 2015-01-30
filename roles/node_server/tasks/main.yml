@@ -1,0 +1,19 @@
+---
+# tasks file for node_server
+
+- name: Install the nodejs repository
+  shell: curl -sL https://deb.nodesource.com/setup | sudo bash - creates=/etc/apt/sources.list.d/nodesource.list
+  register: nodejs_repo
+
+- name: Update the apt-cache
+  apt: update_cache=yes
+  sudo: yes
+  when: nodejs_repo|changed
+
+- name: Install packages
+  apt: name={{ item }} state=present
+  sudo: yes
+  with_items:
+      - nodejs
+      - build-essential
+      - supervisor

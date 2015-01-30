@@ -4,7 +4,7 @@
   sudo: yes
 
 - name: Add the apt repository for mongodb-org
-  apt_repository: repo="deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen"
+  apt_repository: repo="deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" update_cache=yes
   sudo: yes
 
 - name: Make sure mongodb-org in installed

@@ -4,5 +4,18 @@
   apt: name=go-agent state=latest force=yes
   notify:
       - Restart Go-CD agent
+
+- name: Install python-dev and python-pip
+  apt: name={{ item }} state=latest
+  with_items:
+      - python-dev
+      - python-pip
+
+- name: Install ansible and dependencies
+  pip: name=ansible
+
+- name: Install boto
+  pip: name=boto
+
 - name: Replace the GO_SERVER parameter
   replace: dest=/etc/default/go-agent regexp='GO_SERVER=(.*)$' replace='GO_SERVER={{ go_server_hostname }}'
