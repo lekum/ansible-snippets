@@ -1,8 +1,8 @@
 ---
-# tasks file for common server 
+# tasks file for common server
 
 - name: Install packages
   apt: update_cache=yes name={{ item }} state=present
   sudo: yes
   with_items:
-      - git 
+      - git

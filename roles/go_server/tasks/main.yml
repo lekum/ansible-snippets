@@ -4,5 +4,5 @@
   apt: name=go-server state=latest force=yes
 - name: Start Go-CD server
   service: name=go-server state=started
-- name: Wait for the service to be stared in port 8153 
+- name: Wait for the service to be started in port 8153
   wait_for: port=8153 delay=5
