@@ -1,0 +1,5 @@
+---
+# Handlers for nginx role
+
+- name: Restart nginx
+  service: name=nginx state=restarted

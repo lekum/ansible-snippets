@@ -2,7 +2,14 @@
 # tasks file for common server
 
 - name: Install packages
-  apt: update_cache=yes name={{ item }} state=present
+  apt: name={{ item }} state=present
   sudo: yes
   with_items:
       - git
+      - rsync
+      - python-apt
+      - aptitude
+
+- name: Make sure the hostname is present in /etc/hosts
+  sudo: yes
+  lineinfile: dest=/etc/hosts line='127.0.0.1 {{ ansible_hostname }}'

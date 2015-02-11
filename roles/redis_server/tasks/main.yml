@@ -1,0 +1,16 @@
+---
+- name: Update the apt-cache
+  apt: update_cache=yes
+  sudo: yes
+
+- name: Install packages
+  apt: name={{ item }} state=present
+  sudo: yes
+  with_items:
+      - build-essential
+
+- name: Download, compile and install latest redis-stable binaries if not already installed
+  shell: wget http://download.redis.io/redis-stable.tar.gz && tar -zxvf redis-stable.tar.gz && cd redis-stable && make && sudo make install &&  echo -n | sudo utils/install_server.sh && cd .. && rm -rf redis-stable* creates=/etc/init.d/redis_6379
+
+- name: Make sure redis is started
+  service: name=redis_6379 state=started

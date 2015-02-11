@@ -9,7 +9,7 @@
   apt: update_cache=yes
   sudo: yes
   when: nodejs_repo|changed
-# Uses supervisor to manage services
+
 - name: Install packages
   apt: name={{ item }} state=present
   sudo: yes

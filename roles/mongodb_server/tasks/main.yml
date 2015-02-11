@@ -1,5 +1,4 @@
 ---
-# mongodb-org updated official repo
 - name: Add the apt-key for mongodb-org
   apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=0x7F0CEB10
   sudo: yes
@@ -11,7 +10,7 @@
 - name: Make sure mongodb-org in installed
   apt: name=mongodb-org state=present
   sudo: yes
-# Useful in machines with few space
+
 - name: Enable small journal files if applicable
   lineinfile: dest=/etc/mongod.conf regexp="^smallfiles =" line="smallfiles = true"
   sudo: yes
