@@ -20,7 +20,7 @@
       - Restart nginx
 
 - name: Copy the ssl folder
-  copy: src={{ ssl_folder }} dest=/etc/nginx/
+  copy: src={{ ssl_folder }} dest=/etc/nginx/ssl/
   sudo: yes
   when: ssl_folder is defined
   notify:
