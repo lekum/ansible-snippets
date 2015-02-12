@@ -18,5 +18,11 @@
   notify:
       - Restart mongodb-org
 
+- name: Bind mongodb to every IP
+  lineinfile: dest=/etc/mongod.conf regexp="^bind_ip=" state=absent
+  sudo: yes
+  notify:
+      - Restart mongodb-org
+
 - name: Make sure mongod is started
   service: name=mongod state=started
