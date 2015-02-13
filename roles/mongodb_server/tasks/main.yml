@@ -19,7 +19,7 @@
       - Restart mongodb-org
 
 - name: Bind mongodb to every IP
-  lineinfile: dest=/etc/mongod.conf regexp="^bind_ip=" state=absent
+  lineinfile: dest=/etc/mongod.conf regexp="^bind_ip =" state=absent
   sudo: yes
   notify:
       - Restart mongodb-org
