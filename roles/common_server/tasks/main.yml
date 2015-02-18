@@ -9,7 +9,3 @@
       - rsync
       - python-apt
       - aptitude
-
-- name: Make sure the hostname is present in /etc/hosts
-  sudo: yes
-  lineinfile: dest=/etc/hosts line='127.0.0.1 {{ ansible_hostname }}'
