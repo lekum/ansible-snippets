@@ -2,7 +2,7 @@
 
 Role to deploy and configure nginx in a Debian-based machine.
 
-The role adds the ppa `ppa:nginx/stable` and installs the `nginx` service.
+The role adds the ppa `ppa:nginx/stable` and installs the `nginx` service. It also removes the symlink to the default site from the `sites-enabled`.
 
 ## Role parameters
 

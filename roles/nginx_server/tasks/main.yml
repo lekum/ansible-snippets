@@ -7,6 +7,11 @@
   apt: name=nginx state=present
   sudo: yes
 
+- name: Remove default site
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify:
+      - Restart nginx
+
 - name: Configure a site
   copy: src={{ site_file }} dest=/etc/nginx/sites-available/{{ site_file|basename }}
   sudo: yes
@@ -28,3 +33,4 @@
 
 - name: Start nginx
   service: name=nginx state=started
+  sudo: yes
