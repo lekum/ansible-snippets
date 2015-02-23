@@ -7,7 +7,7 @@
   apt_repository: repo="deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" update_cache=yes
   sudo: yes
 
-- name: Make sure mongodb-org in installed
+- name: Make sure mongodb-org is installed
   apt: name=mongodb-org state=present
   sudo: yes
 
@@ -26,3 +26,4 @@
 
 - name: Make sure mongod is started
   service: name=mongod state=started
+  sudo: yes
