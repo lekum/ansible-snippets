@@ -1,0 +1,36 @@
+---
+## Playbook to provision Mac OS X with boot2docker
+#
+- hosts: mac
+  vars:
+      - boot2docker_binary_url: >
+          https://github.com/boot2docker/boot2docker-cli/releases/download/v1.5.0/boot2docker-v1.5.0-darwin-amd64
+      - brew_install_url: >
+          https://raw.githubusercontent.com/Homebrew/install/master/install
+  tasks:
+
+      - name: Install brew
+        shell: ruby -e "$(curl -fsSL {{ brew_install_url }})" < /dev/null creates=/usr/local/bin/brew
+
+      - name: Install cask
+        command: /usr/local/bin/brew install caskroom/cask/brew-cask creates=/usr/local/bin/brew-cask
+
+      - name: Install the dependencies
+        homebrew: name={{ item }} state=present
+        with_items:
+            - fig
+
+      - name: Install VirtualBox via brew cask
+        shell: /usr/local/bin/brew-cask install virtualbox
+
+      - name: Download the boot2docker-cli tool
+        get_url: url={{ boot2docker_binary_url }} dest=~/boot2docker mode=u+x
+
+      - name: Run the boot2docker init
+        shell: ./boot2docker init
+
+      - name: Run the boot2docker start
+        shell: ./boot2docker start
+
+      - name: Prepare the environment variables
+        shell: ./boot2docker shellinit >> ~/.bashrc
