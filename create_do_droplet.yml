@@ -1,0 +1,20 @@
+---
+## Playbook to create a Digital Ocean droplet
+#
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+      - name: Create a new Droplet
+        digital_ocean:
+            state: present
+            command: droplet
+            name: CoreOS-01
+            region_id: 3
+            # 512 MB
+            size_id: 66
+            # CoreOS 557.2.0
+            image_id: 10679356
+            ssh_key_ids: 701355
+            unique_name: yes
+        register: droplet
