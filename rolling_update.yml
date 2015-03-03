@@ -1,0 +1,34 @@
+---
+# Playbook to perform apt-get update && apt-get dist-upgrade of Debian-based servers using a rolling scheme with an AWS ELB
+#
+- hosts: debian
+  serial: 1
+  vars:
+      ec2_region: us-west-2
+
+  pre_tasks:
+      - name: Gather ec2 facts
+        action: ec2_facts
+
+      - name: Instance de-register
+        connection: local
+        local_action:
+            module: ec2_elb
+            region: "{{ ec2_region }}"
+            instance_id: "{{ ansible_ec2_instance_id }}"
+            state: 'absent'
+  tasks:
+      - name: Perform the apt-get update && apt-get dist-upgrade
+        sudo: yes
+        apt: update_cache=yes upgrade=dist
+
+  post_tasks:
+      - name: Instance register
+        connection: local
+        local_action:
+            module: ec2_elb
+            region: "{{ ec2_region }}"
+            instance_id: "{{ ansible_ec2_instance_id }}"
+            ec2_elbs: "{{ item }}"
+            state: 'present'
+        with_items: ec2_elbs
