@@ -1,0 +1,6 @@
+- hosts: localhost
+  connection: local
+  sudo: yes
+  tasks:
+      - name: Run ls -l in a docker container
+        docker: image=ubuntu:14.10 name=ansible-docker command="ls -l"
