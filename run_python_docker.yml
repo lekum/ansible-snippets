@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  connection: local
+  sudo: yes
+  tasks:
+      - name: Build the ubuntu_python docker image
+        docker_image:
+            name: ubuntu_python
+            path: docker
+            state: build
+
+      - name: Run python -m SimpleHTTPServer and forward port to 80
+        docker:
+            image: ubuntu_python
+            name: python
+            state: running
+            command: python -m SimpleHTTPServer
+            ports: "80:8000"
