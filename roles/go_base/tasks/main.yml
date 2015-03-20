@@ -1,5 +1,5 @@
 ---
-      - name: Add the Go-CD repo
-        apt_repository: repo='deb http://download.go.cd/gocd-deb/ /' state=present
-      - name: Install JDK 7
-        apt: name=openjdk-7-jdk state=latest update_cache=yes
+- name: Add the Go-CD repo
+  apt_repository: repo='deb http://download.go.cd/gocd-deb/ /' state=present
+- name: Install JDK
+  apt: name=default-jdk state=latest update_cache=yes

@@ -1,6 +1,6 @@
 # Go Agent role
 
-Role to deploy the software to run Go Agent on Linux.
+Role to deploy the software to run Go Server on Linux.
 
 ## Role parameters
 
