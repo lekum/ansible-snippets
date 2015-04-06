@@ -1,11 +1,9 @@
 ---
 - name: Update the apt-cache
   apt: update_cache=yes
-  sudo: yes
 
 - name: Install packages
   apt: name={{ item }} state=present
-  sudo: yes
   with_items:
       - build-essential
 

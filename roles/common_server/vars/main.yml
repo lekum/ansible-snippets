@@ -1,0 +1,12 @@
+---
+packages_to_install:
+    - git
+    - rsync
+    - python-apt
+    - aptitude
+    - ntp
+
+ntp_servers:
+    - 0.amazon.pool.ntp.org
+    - 1.amazon.pool.ntp.org
+    - 2.amazon.pool.ntp.org

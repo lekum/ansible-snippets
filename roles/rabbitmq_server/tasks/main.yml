@@ -1,16 +1,16 @@
 ---
 - name: Add the apt-key for RabbitMQ
   apt_key: url=https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-  sudo: yes
 
 - name: Add the apt repository for RabbitMQ
   apt_repository: repo="deb http://www.rabbitmq.com/debian/ testing main" update_cache=yes
-  sudo: yes
 
 - name: Make sure rabbitmq-server is installed
-  apt: name=rabbitmq-server state=present
-  sudo: yes
+  apt: name=rabbitmq-server state=latest
+
+- name: Set RabbitMQ configuration
+  template: src=rabbitmq.config.j2 dest=/etc/rabbitmq/rabbitmq.config owner=rabbitmq group=rabbitmq mode=0640
+  notify: Restart RabbitMQ
 
 - name: Make sure rabbitmq-server is started
   service: name=rabbitmq-server state=started enabled=yes
-  sudo: yes

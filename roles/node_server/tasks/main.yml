@@ -7,12 +7,10 @@
 
 - name: Update the apt-cache
   apt: update_cache=yes
-  sudo: yes
   when: nodejs_repo|changed
 
 - name: Install packages
   apt: name={{ item }} state=present
-  sudo: yes
   with_items:
       - nodejs
       - build-essential

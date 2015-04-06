@@ -3,9 +3,23 @@
 
 - name: Install packages
   apt: name={{ item }} state=present
-  sudo: yes
-  with_items:
-      - git
-      - rsync
-      - python-apt
-      - aptitude
+  with_items: packages_to_install
+
+- name: Set machine hostname to match the one defined
+  hostname: name={{ hostname }}
+  when: hostname is defined
+
+- name: Set hosts file to auto resolve localhost
+  lineinfile: dest=/etc/hosts line='127.0.0.1 localhost'
+
+- name: Set hosts file to auto resolve the hostname
+  lineinfile: dest=/etc/hosts line='127.0.0.1 {{ hostname }}'
+  when: hostname is defined
+
+- name: Fill the template for ntp.conf
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify:
+  - Restart ntp
+
+- name: Ensure ntp is started and enabled
+  service: name=ntp state=started enabled=yes

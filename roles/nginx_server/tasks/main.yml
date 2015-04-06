@@ -1,11 +1,9 @@
 ---
 - name: Add the apt repository for nginx
   apt_repository: repo="ppa:nginx/stable" update_cache=yes
-  sudo: yes
 
 - name: Install nginx
   apt: name=nginx state=present
-  sudo: yes
 
 - name: Remove default site
   file: path=/etc/nginx/sites-enabled/default state=absent
@@ -14,23 +12,19 @@
 
 - name: Configure a site
   copy: src={{ site_file }} dest=/etc/nginx/sites-available/{{ site_file|basename }}
-  sudo: yes
   when: site_file is defined
 
 - name: Enable a site
   file: src=/etc/nginx/sites-available/{{ site_file|basename }} dest=/etc/nginx/sites-enabled/{{ site_file|basename }} state=link
-  sudo: yes
   when: site_file is defined
   notify:
       - Restart nginx
 
 - name: Copy the ssl folder
   copy: src={{ ssl_folder }} dest=/etc/nginx/ssl/
-  sudo: yes
   when: ssl_folder is defined
   notify:
       - Restart nginx
 
 - name: Start nginx
   service: name=nginx state=started
-  sudo: yes
