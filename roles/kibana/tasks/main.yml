@@ -1,0 +1,15 @@
+---
+- name: Ensure that the kibana installation dir exists
+  file: path={{ kibana_installation_dir }} state=directory
+
+- name: Download Kibana4
+  get_url: url={{ kibana_download_url }} dest=/tmp/kibana.tar.gz
+
+- name: Unarchive kibana4, skipping the root directory
+  command: /bin/tar -zxvf /tmp/kibana.tar.gz -C {{ kibana_installation_dir }} --strip 1
+
+- name: Copy the service template
+  template: src=kibana4.j2 dest=/etc/init.d/kibana4 mode=755
+
+- name: Make sure kibana4 is started and enabled
+  service: name=kibana4 state=started enabled=yes

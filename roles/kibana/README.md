@@ -1,0 +1,15 @@
+# Kibana role
+
+Role to deploy Kibana in a Debian-based machine.
+
+## Role parameters
+
+```
+kibana_download_url: https://download.elasticsearch.org/kibana/kibana/kibana-4.0.1-linux-x64.tar.gz
+kibana_installation_dir: /opt/kibana
+
+```
+
+## Role dependencies
+
+None.
